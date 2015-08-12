@@ -46,8 +46,10 @@ namespace Final
             {
                 string hashedPW = RafaEcnrypt.Rafacrypt(oldPw, short.Parse(UserName.Length.ToString()));
                 string storedPW = string.Empty;
+                string storedUser = string.Empty;
                 using (StreamReader reader = new StreamReader("user.login"))
                 {
+                    storedUser = reader.ReadLine();
                     storedPW = reader.ReadLine();
                 }
                 if (hashedPW == storedPW)
@@ -56,6 +58,7 @@ namespace Final
                     {
                         using(TextWriter tw = new StreamWriter("user.login",false))
                         {
+                            tw.WriteLine(newUser);
                             tw.Write(RafaEcnrypt.Rafacrypt(newPw,short.Parse(newUser.Length.ToString())));
                         }
                         

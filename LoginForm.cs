@@ -54,13 +54,15 @@ namespace Final
             string hashedInput = RafaEcnrypt.Rafacrypt(pwd, short.Parse(user.Length.ToString()));
 
             string storedPW = string.Empty;
+            string storedUser = string.Empty;
 
             using (StreamReader reader = new StreamReader("user.login"))
             {
-                storedPW = reader.ReadLine();
+                storedUser = reader.ReadLine();
+                storedPW = reader.ReadLine();                
             }
 
-            result = hashedInput == storedPW;
+            result = (hashedInput == storedPW & user == storedUser);
 
             return result;
         }
